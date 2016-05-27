@@ -1,0 +1,153 @@
+<!--Straight Edge Technologies - MusicMeld-->
+<!--PoCv2016.4.2.1jm-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>MusicMeld</title>
+	<meta name="description" content="Music Meld">
+	<meta name="author" content="Straight Edge Technologies">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<!--Framework Elements-->
+	<link rel="stylesheet" href="css/normalize.css">
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+
+	<!--MDL Elements-->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="css/material.min.css" />
+	<script src="js/material.min.js"></script>
+
+	<!--Custom CSS-->
+	<link rel="stylesheet" href="css/custom_mdl.css">
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body class="mdl-color--grey-900 mdl-layout mdl-js-layout">
+	<header class="mdl-layout__header">
+		<div class="mdl-layout__header-row">
+			<img src="gfx/logo.png">
+			<h1>MusicMeld</h1>
+			<div class="mdl-layout-spacer"></div>
+			<h5 id="unameDisplay">Untitled Playlist</h5>
+			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab" id="acctBtn"><i class="material-icons mdl-color-text--accent-contrast">playlist_add</i></button>
+			<div class="mdl-tooltip" for="acctBtn">My Playlists</div>
+		</div>
+		<div class="mdl-card mdl-shadow--24dp mdl-tabs mdl-js-tabs" id="acctCard">
+			<div class="mdl-card__title mdl-color--red-700">
+				<div class="mdl-card__title-text">My Playlists</div>
+				<div class="mdl-layout-spacer"></div>
+				<p class="mdl-card__subtitle-text i">Save and Load Playlists</p>
+			</div>
+			<div class="mdl-card__actions mdl-tabs__tab-bar">
+				<a href="#loginTab" class="mdl-tabs__tab is-active">Save</a>
+				<a href="#regTab" class="mdl-tabs__tab">Load</a>
+			</div>
+			<div class="mdl-card__supporting-text mdl-tabs__panel is-active" id="loginTab">
+				<h6>Save Current Playlist</h6>
+				<form>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="savePL" name="savePL" size="50" maxlength="200" autofocus/>
+						<label class="mdl-textfield__label" for="savePL">Enter a Name</label>
+					</div>
+					<button type="submit" class="mdl-button mdl-js-button mdl-button--icon" id="savePLbutton"><i class="material-icons">save</i></button>
+				</form>
+			</div>
+			<div class="mdl-card__supporting-text mdl-tabs__panel" id="regTab">
+				<h6>Load Existing Playlist</h6>
+				<div class="mdl-list" id="plList">
+					<div class="mdl-list__item selectedPL">
+						<span class="mdl-list__item-primary-content">Example Playlist</span>
+						<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">delete</i></a>
+					</div>
+					<div class="mdl-list__item">
+						<span class="mdl-list__item-primary-content">Another Playlist</span>
+						<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">delete</i></a>
+					</div>
+					<div class="mdl-list__item">
+						<span class="mdl-list__item-primary-content">Third Playlist</span>
+						<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">delete</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="mdl-layout__content">
+		<div class="mdl-card mdl-shadow--4dp" id="playlistCard">
+			<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--red-700 mdl-js-ripple-effect" id="playlistBtn"><i class="material-icons mdl-color-text--accent-contrast">queue_music</i></button>
+			<div class="mdl-card__title mdl-color--red-600">
+				<h5 class="mdl-card__title-text">Playlist</h5>
+				<div class="mdl-layout-spacer"></div>
+				<p class="mdl-card__subtitle-text i">View and edit Playlist</p>
+			</div>
+			<div class="mdl-card__supporting-text" id="addSongSection">
+				<h4>Add a Song</h4>
+				<form id="linkform">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="videolink" name="videolink" size="50" maxlength="200" autofocus/>
+						<label class="mdl-textfield__label" for="videolink">YouTube URL or Search...</label>
+					</div>
+					<button type="submit" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">playlist_add</i></button>
+				</form>
+			</div>
+			<div class="mdl-card__supporting-text mdl-card--border" id="playlistCardSection">
+				<h4>All Songs</h4>
+				<div id="plTableCon">
+					<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-color-text--accent-contrast" id="pltable">
+						<thead>
+							<tr>
+								<th class="mdl-data-table__cell--non-numeric">Search Term</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<a href="javascript:void(0)" id="remove" onclick="removeItems()" class="mdl-button mdl-button--colored mdl-js-button"><i class="material-icons">clear_all</i> Remove Selected</a>
+			</div>
+		</div>
+
+		<div class="mdl-card mdl-shadow--8dp" id="nowplaying">
+			<div class="mdl-card__title mdl-color--red-600">
+				<h5 class="mdl-card__title-text">Now Playing</h5>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<span id="title" style="font-weight: bold"></span><br>
+				<span class="i">Length: <span id="duration"></span></span>
+			</div>
+			<div class="mdl-card__actions">
+				<a href="javascript:void(0)" id="show" onclick="toggleVideo()" class="mdl-button mdl-js-button mdl-button--colored"><i class="material-icons">video_label</i> Show Video</a>
+				<a href="javascript:void(0)" id="pause" onclick="togglePause()" class="mdl-button mdl-js-button mdl-button--colored"><i class="material-icons">pause</i> Pause</a>
+				<a href="javascript:void(0)" id="next" onclick="nextVideo()" class="mdl-button mdl-js-button mdl-button--colored"><i class="material-icons">fast_forward</i> Next Video</a>
+			</div>
+			<div class="titanic"></div>
+		</div>
+
+		<div class="mdl-card mdl-shadow--16dp" id="player"></div>
+	</main>
+
+
+	<footer class="mdl-mini-footer">
+		<div class="mdl-mini-footer__left-section">
+			&copy; 2016 Straight Edge Technologies. All rights reserved.
+		</div>
+		<div class="mdl-mini-footer__right-section">
+			<h4 class="i"><i class="material-icons" id="infoIcon">info_outline</i> Pre-Release <span style="font-size: 50%">v2016.4.24.1</span></h4>
+			<div class="mdl-tooltip mdl-tooltip--large mdl-tooltip--top" for="infoIcon">Status:<br>Playlist via YouTube<br>WIP: Store/Rearrange PLs</div>
+		</div>
+	</footer>
+
+	<script src="js/layout.js"></script>
+	<script src="js/playlist.js"></script>
+	<script src="js/storage.js"></script>
+	<script src="js/youtube.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/*auth: jmcgirr*/
+/*date: 4/1/16*/
+
+/**************************************************/
+
+/*desc: Custom overrides for MDL elements*/
+
+.mdl-layout__header {
+}
+.mdl-layout__header-row {
+    height: 110px;
+}
+.mdl-layout__header-row h1 {
+    padding: 0 20px;
+}
+.mdl-layout__content {}
+
+.mdl-mini-footer {
+    padding: 16px;
+}
+
+.mdl-card {
+    background: #616161;
+    margin: 50px auto 0px;
+    width: 512px;
+	height: auto;
+}
+.mdl-card__title-text {
+    color: white;
+    opacity: 1;
+}
+.mdl-card__subtitle-text {
+    color: white;
+    opacity: .8;
+    padding: 0px 20px;
+}
+.mdl-card__supporting-text {
+    color: white;
+    opacity: .7;
+}
+
+.mdl-textfield__label {
+    color: rgba(255, 255, 255, .5);
+}
+
+.mdl-mini-footer__left-section {
+    padding-top: 10px;
+}
+
+.mdl-tabs__tab {
+	color: rgba(255,255,255,.54);
+}
+.mdl-tabs.is-upgraded .mdl-tabs__tab.is-active {
+	color: rgba(255,255,255,.87);
+}
+
+.mdl-data-table__cell--non-numeric {
+    width: 100%;
+}
+.mdl-data-table th {
+	font-size: 14px;
+	font-weight: bold;
+	color: rgba(0,0,0,.88);
+}
+.mdl-data-table td {
+	text-align: left;
+	color: rgba(0,0,0,.78);
+}
+
+.mdl-list .mdl-list__item {
+	color: rgba(255,255,255,.87);
+}
+.mdl-list .mdl-list__item i {
+	color: rgba(255,255,255,.87);
+}
