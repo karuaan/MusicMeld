@@ -1,5 +1,5 @@
 
-/* By Nicholas Cyprus (ngc0202) */
+/* By Nicholas Cyprus (ngc0202) and Jeff McGirr */
 
 $(document).ready(function () {
 	$("#acctCard").toggle(0);
