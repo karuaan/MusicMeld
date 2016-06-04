@@ -1,3 +1,6 @@
+
+/* By Nicholas Cyprus (ngc0202) */
+
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -99,7 +102,7 @@ function checkBadVideo() {
 // play the next video in the search results
 function nextVideo() {
 	console.log("starting next video in search results");
-	var next = playlist[curvid].nextvid();
+	var next = nextsearchvid(playlist[curvid]);
 	if (next != undefined) 
 		player.loadVideoById(next);
 }

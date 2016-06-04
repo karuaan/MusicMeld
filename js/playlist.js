@@ -1,17 +1,11 @@
+
+/* By Nicholas Cyprus (ngc0202) */
+
 function PlaylistItem(searchterm, searchresults, chosenselection) {
 	this.searchterm = searchterm;
 	this.searchresults = searchresults;
 	this.chosenselection = chosenselection;
 	this.videoid = searchresults[chosenselection].id.videoId;
-	this.nextvid = function() {
-		if (chosenselection+1 < searchresults.length) {
-			chosenselection++;
-			this.videoid = searchresults[chosenselection].id.videoId;
-			return this.videoid;
-		} else {
-			return undefined;
-		}
-	}
 }
 
 var curvid = -1; //current playing video
@@ -41,13 +35,12 @@ function updateplaylist() {
 	content += "</tbody>\n</table>";
 	$('#plTableCon').html(content);
 	componentHandler.upgradeDom();
-	// bug: update material design (??)
 }
 
 // Handle form submission
 function parseAndPlay(e) {
 	e.preventDefault(); // stop submit action
-	var searchResults;
+	var searchResults;	
 	var term = form.videolink.value;
 	if (term.indexOf("youtube.com/watch?v=") >= 0) { // valid link?
 		var vid = term.substring(term.indexOf("=")+1);
@@ -65,7 +58,7 @@ function parseAndPlay(e) {
 			}
 		}
 
-		//TODO: THIS IS DANGEROUS!!! Sanitize input and put API key server-side.
+		// Bad. Keep API key server-side!
 		search.open("GET", "https://www.googleapis.com/youtube/v3/search?part=id&key=AIzaSyA8174wCTa_zsaDX0bI8YCwaAqn9iVCJVw&maxResults=30&type=video&videoEmbeddable=true&q="+term.replace(/ /g, "+"), true);
 		search.send();
 		emptysearch();
@@ -84,4 +77,14 @@ function removeItems(e) {
 // clears the search box
 function emptysearch() {
 	$("#videolink")[0].value = "";
+}
+
+function nextsearchvid(item) {
+	if (item.chosenselection+1 < item.searchresults.length) {
+			item.chosenselection++;
+			item.videoid = item.searchresults[item.chosenselection].id.videoId;
+			return item.videoid;
+		} else {
+			return undefined;
+		}
 }
